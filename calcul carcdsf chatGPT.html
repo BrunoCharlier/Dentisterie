@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul des Indemnités Journalières</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        function calculateIndemnities() {
+            const dailySS = 90;
+            const dailyCARCDSF = 67.57;
+            const totalDays = parseInt(document.getElementById('days').value);
+
+            if (isNaN(totalDays) || totalDays <= 0) {
+                alert('Veuillez entrer un nombre de jours valide.');
+                return;
+            }
+
+            let ssFirst90 = Math.min(totalDays, 90) * dailySS;
+            let ssNext90 = Math.max(totalDays - 90, 0) * dailySS;
+            let carcdsfNext90 = Math.max(totalDays - 90, 0) * dailyCARCDSF;
+
+            let totalSS = ssFirst90 + ssNext90;
+            let totalCARCDSF = carcdsfNext90;
+
+            document.getElementById('ssFirst90').innerText = ssFirst90.toFixed(2) + ' euros';
+            document.getElementById('ssNext90').innerText = ssNext90.toFixed(2) + ' euros';
+            document.getElementById('totalSS').innerText = totalSS.toFixed(2) + ' euros';
+
+            document.getElementById('carcdsfNext90').innerText = carcdsfNext90.toFixed(2) + ' euros';
+            document.getElementById('totalCARCDSF').innerText = totalCARCDSF.toFixed(2) + ' euros';
+
+            document.getElementById('grandTotal').innerText = (totalSS + totalCARCDSF).toFixed(2) + ' euros';
+        }
+    </script>
+</head>
+<body>
+    <h1>Calcul des Indemnités Journalières pour un Chirurgien-Dentiste</h1>
+    <p>Revenu annuel : 120 000 euros</p>
+    <div class="input-container">
+        <label for="days">Nombre de jours d'arrêt maladie :</label>
+        <input type="number" id="days" min="1" required>
+        <button onclick="calculateIndemnities()">Calculer</button>
+    </div>
+
+    <h2>Sécurité Sociale (SS)</h2>
+    <table>
+        <tr>
+            <th>Période</th>
+            <th>Montant par jour</th>
+            <th>Nombre de jours</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>90 premiers jours</td>
+            <td>90 euros</td>
+            <td id="ssFirst90Days">90</td>
+            <td id="ssFirst90">0 euros</td>
+        </tr>
+        <tr>
+            <td>Jours 91 à 180</td>
+            <td>90 euros</td>
+            <td id="ssNext90Days">90</td>
+            <td id="ssNext90">0 euros</td>
+        </tr>
+        <tr class="total">
+            <td colspan="3">Total SS</td>
+            <td id="totalSS">0 euros</td>
+        </tr>
+    </table>
+
+    <h2>CARCDSF</h2>
+    <table>
+        <tr>
+            <th>Période</th>
+            <th>Montant par jour</th>
+            <th>Nombre de jours</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>Jours 91 à 180</td>
+            <td>67,57 euros</td>
+            <td id="carcdsfNext90Days">90</td>
+            <td id="carcdsfNext90">0 euros</td>
+        </tr>
+        <tr class="total">
+            <td colspan="3">Total CARCDSF</td>
+            <td id="totalCARCDSF">0 euros</td>
+        </tr>
+    </table>
+
+    <h2>Total des Indemnités pour <span id="totalDays">180</span> Jours</h2>
+    <table>
+        <tr>
+            <th>Source</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>Sécurité Sociale (SS)</td>
+            <td id="totalSS2">0 euros</td>
+        </tr>
+        <tr>
+            <td>CARCDSF</td>
+            <td id="totalCARCDSF2">0 euros</td>
+        </tr>
+        <tr class="total">
+            <td>Total Général</td>
+            <td id="grandTotal">0 euros</td>
+        </tr>
+    </table>
+</body>
+</html>
