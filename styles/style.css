@@ -1,7 +1,26 @@
-body{
-    background-color: blue !important;
+.miseEnPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .logo{
     height: 50px !important;
     width: auto;
+}
+.chirDentSeul{
+    width: 25%;
+    height: auto;
+}
+h3{
+    background-color: white !important;
+    padding: 10px 20px;        
+    border-radius: 15px;       
+    display: inline-block;     
+    margin: 10px 0;            
+}
+h4{
+    text-transform: uppercase;
 }

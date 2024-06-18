@@ -1,0 +1,21 @@
+.styleTexte{
+    color: rgb(255, 255, 255)
+}
+.styleBgRedMenu{
+    background-color: rgb(142, 54, 94);
+}
+.styleBlack{
+    color: rgb(0, 0, 0);
+}
+.styleFooter{
+    background-color: rgb(201, 201, 201);
+}
+.styleBlueLink{
+    color: rgb(16, 25, 220);
+}
+.styleBgPage{
+    background: linear-gradient(rgb(17, 18, 38), rgb(35, 38, 89));
+}
+.styleHoverLink :hover{
+    color: rgb(35, 38, 89);
+}
